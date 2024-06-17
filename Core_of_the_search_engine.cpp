@@ -85,7 +85,7 @@ int MatchDocument(const pair<int, vector<string>>& content,
 }
 
 // Для каждого найденного документа возвращает его id
-vector<pair<int, int>> FindDocuments(const vector<pair<int, vector<string>>>& documents,
+/*vector<pair<int, int>> FindDocuments(const vector<pair<int, vector<string>>>& documents,
     const set<string>& stop_words,
     const string& query) {
     const set<string> query_words = ParseQuery(query, stop_words);
@@ -100,6 +100,18 @@ vector<pair<int, int>> FindDocuments(const vector<pair<int, vector<string>>>& do
             matched_documents.push_back(pair<int, int>{document_id, relevance});
         }
         document_id++;
+    }
+    return matched_documents;
+}*/
+vector<pair<int, int>> FindDocuments(const vector<pair<int, vector<string>>>& documents, const set<string>& stop_words, const string& query) {
+    vector<pair<int, int>> matched_documents;
+    const set<string> query_words = ParseQuery(query, stop_words);
+    for (int i = 0; i < documents.size(); i++) {
+        pair<int, vector<string>> test = documents[i];
+        int relevance = MatchDocument(test, query_words);
+        if (relevance > 0) {
+            matched_documents.push_back(pair<int, int>{i, relevance});
+        }
     }
     return matched_documents;
 }
