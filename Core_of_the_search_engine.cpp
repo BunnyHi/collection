@@ -35,7 +35,6 @@ vector<string> SplitIntoWords(const string& text) {
     if (!word.empty()) {
         words.push_back(word);
     }
-
     return words;
 }
 
@@ -84,25 +83,6 @@ int MatchDocument(const pair<int, vector<string>>& content,
     return relevance;
 }
 
-// Для каждого найденного документа возвращает его id
-/*vector<pair<int, int>> FindDocuments(const vector<pair<int, vector<string>>>& documents,
-    const set<string>& stop_words,
-    const string& query) {
-    const set<string> query_words = ParseQuery(query, stop_words);
-    vector<pair<int, int>> matched_documents;
-    int document_id = 0;
-    int size_doc = documents.size();
-    pair<int, vector<string>> test;
-    while (document_id < size_doc) {
-        test = documents[document_id];
-        int relevance = MatchDocument(test, query_words);
-        if (relevance > 0) {
-            matched_documents.push_back(pair<int, int>{document_id, relevance});
-        }
-        document_id++;
-    }
-    return matched_documents;
-}*/
 vector<pair<int, int>> FindDocuments(const vector<pair<int, vector<string>>>& documents, const set<string>& stop_words, const string& query) {
     vector<pair<int, int>> matched_documents;
     const set<string> query_words = ParseQuery(query, stop_words);
